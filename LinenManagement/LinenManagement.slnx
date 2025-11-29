@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="../LinenManagementTest/LinenManagementTest.csproj" Id="e85f4017-3d31-46db-b67b-8ccf72465f35" />
+  <Project Path="LinenManagement.csproj" />
+</Solution>
