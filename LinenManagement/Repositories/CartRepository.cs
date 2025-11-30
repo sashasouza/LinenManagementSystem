@@ -42,14 +42,21 @@ namespace LinenManagement.Repositories
             {
                     try
                     {
-                        _context.CartLog.Attach(cartLog);
-
-                        _context.Entry(cartLog).State = EntityState.Modified;
+                    var temp = _context.CartLog.Where(c => c.CartLogId == cartLog.CartLogId).FirstOrDefault();
+                    if (temp?.EmployeeId == cartLog.EmployeeId) // assuming the employeeId sent in the request is that of the one editing otherwise the logged in user can be stored and then used to check
+                    {
+                        temp.ActualWeight = cartLog.ActualWeight;
+                        temp.ReportedWeight = cartLog.ReportedWeight;
+                        temp.DateWeighed = cartLog.DateWeighed;
+                        temp.CartId = cartLog.CartId;
+                        temp.LocationId = cartLog.LocationId;
+                        temp.ReceiptNumber = cartLog.ReceiptNumber;
 
                         await _context.SaveChangesAsync();
 
                         Log.Information("Successfully updated CartLog with cartLogId: " + cartLog.CartLogId);
                         return cartLog;
+                    }                   
                     }
                     catch (Exception ex)
                     {
