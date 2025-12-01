@@ -20,7 +20,7 @@ namespace LinenManagement.Controllers
         }
 
         [HttpPost("api/[controller]/login")]
-        public async Task<IActionResult> Login(LoginRequest request)
+        public async Task<IActionResult> Login([FromBody]LoginRequest request)
         {
             var employee = await _authenticationService.Authenticate(request.Email, request.Password); // Using email and password as login creds
 
